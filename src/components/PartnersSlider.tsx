@@ -3,18 +3,26 @@
 import { useEffect, useCallback, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { motion } from "motion/react";
+import { PARTNER_LOGOS } from "@/lib/images";
+import { ImageWithFallback } from "@/components/ImageWithFallback";
 
 const partners = [
-  { id: 1, name: "أرامكو السعودية", nameEn: "Saudi Aramco", icon: "⬡", color: "#00A651", bg: "#001a0d" },
-  { id: 2, name: "الريتز كارلتون", nameEn: "Ritz-Carlton", icon: "♦", color: "#B8860B", bg: "#1a1305" },
-  { id: 3, name: "موسم الرياض", nameEn: "Riyadh Season", icon: "✦", color: "#E8C84A", bg: "#1a1600" },
-  { id: 4, name: "نيوم", nameEn: "NEOM", icon: "◈", color: "#00BFFF", bg: "#00101a" },
-  { id: 5, name: "مجموعة المملكة", nameEn: "Kingdom Holdings", icon: "▲", color: "#C0A030", bg: "#1a1408" },
-  { id: 6, name: "هيئة الأفلام", nameEn: "Film Commission", icon: "◉", color: "#FF6B35", bg: "#1a0c00" },
-  { id: 7, name: "مطار الملك عبدالعزيز", nameEn: "KAIA", icon: "✈", color: "#5B9BD5", bg: "#000d1a" },
-  { id: 8, name: "Vision 2030", nameEn: "Vision 2030", icon: "◎", color: "#009C5B", bg: "#001a0e" },
-  { id: 9, name: "فندق الفيصلية", nameEn: "Al Faisaliyah Hotel", icon: "◆", color: "#B8860B", bg: "#1a1305" },
-  { id: 10, name: "شركة STC", nameEn: "STC Group", icon: "⬟", color: "#7C3AED", bg: "#0d0018" },
+  { id: 1, name: "أرامكو السعودية", nameEn: "Saudi Aramco", logo: PARTNER_LOGOS[0], color: "#00A651", bg: "#001a0d" },
+  { id: 2, name: "مجموعة بن لادن", nameEn: "Saudi Binladin Group", logo: PARTNER_LOGOS[16], color: "#B8860B", bg: "#1a1305" },
+  { id: 3, name: "وزارة الطاقة", nameEn: "Ministry of Energy", logo: PARTNER_LOGOS[15], color: "#00BFFF", bg: "#00101a" },
+  { id: 4, name: "النادي الأهلي", nameEn: "Al-Ahli FC", logo: PARTNER_LOGOS[5], color: "#009C5B", bg: "#001a0e" },
+  { id: 5, name: "شركة الآفاق", nameEn: "Al Afaq", logo: PARTNER_LOGOS[21], color: "#C0A030", bg: "#1a1408" },
+  { id: 6, name: "جامعة كاساو", nameEn: "Kasau University", logo: PARTNER_LOGOS[23], color: "#5B9BD5", bg: "#000d1a" },
+  { id: 7, name: "شريك 1", nameEn: "Partner", logo: PARTNER_LOGOS[7], color: "#E8C84A", bg: "#1a1600" },
+  { id: 8, name: "شريك 2", nameEn: "Partner", logo: PARTNER_LOGOS[8], color: "#FF6B35", bg: "#1a0c00" },
+  { id: 9, name: "شريك 3", nameEn: "Partner", logo: PARTNER_LOGOS[9], color: "#7C3AED", bg: "#0d0018" },
+  { id: 10, name: "شريك 4", nameEn: "Partner", logo: PARTNER_LOGOS[10], color: "#B8860B", bg: "#1a1305" },
+  { id: 11, name: "شريك 5", nameEn: "Partner", logo: PARTNER_LOGOS[11], color: "#00A651", bg: "#001a0d" },
+  { id: 12, name: "شريك 6", nameEn: "Partner", logo: PARTNER_LOGOS[12], color: "#D4A017", bg: "#1a1408" },
+  { id: 13, name: "شريك 7", nameEn: "Partner", logo: PARTNER_LOGOS[13], color: "#00BFFF", bg: "#00101a" },
+  { id: 14, name: "شريك 8", nameEn: "Partner", logo: PARTNER_LOGOS[14], color: "#E8C84A", bg: "#1a1600" },
+  { id: 15, name: "شريك 9", nameEn: "Partner", logo: PARTNER_LOGOS[17], color: "#FF6B35", bg: "#1a0c00" },
+  { id: 16, name: "شريك 10", nameEn: "Partner", logo: PARTNER_LOGOS[18], color: "#5B9BD5", bg: "#000d1a" },
 ];
 
 function PartnerCard({ partner }: { partner: (typeof partners)[0] }) {
@@ -22,7 +30,7 @@ function PartnerCard({ partner }: { partner: (typeof partners)[0] }) {
   return (
     <div className="flex-shrink-0 select-none" style={{ width: "clamp(130px, 35vw, 200px)" }}>
       <motion.div
-        className="relative h-24 sm:h-28 rounded-2xl flex flex-col items-center justify-center gap-2 cursor-grab active:cursor-grabbing transition-all duration-400"
+        className="relative h-28 sm:h-32 rounded-2xl flex flex-col items-center justify-center gap-2 cursor-grab active:cursor-grabbing transition-all duration-400"
         style={{
           background: hovered ? `linear-gradient(135deg, ${partner.bg}, rgba(25,20,8,0.9))` : "rgba(20,16,6,0.7)",
           border: hovered ? `1px solid ${partner.color}55` : "1px solid rgba(184,134,11,0.1)",
@@ -32,12 +40,16 @@ function PartnerCard({ partner }: { partner: (typeof partners)[0] }) {
         onHoverStart={() => setHovered(true)}
         onHoverEnd={() => setHovered(false)}
       >
-        <motion.div className="flex items-center justify-center w-10 h-10 rounded-xl" style={{ background: hovered ? `${partner.color}18` : "rgba(184,134,11,0.08)", color: hovered ? partner.color : "rgba(184,134,11,0.5)", fontSize: "1.4rem", transition: "all 0.3s" }}>
-          {partner.icon}
-        </motion.div>
+        <div className="w-16 h-16 rounded-xl overflow-hidden flex items-center justify-center p-1.5" style={{ background: "rgba(255,255,255,0.05)" }}>
+          <ImageWithFallback
+            src={partner.logo}
+            alt={partner.name}
+            className="w-full h-full object-contain"
+            loading="lazy"
+          />
+        </div>
         <div className="text-center px-3">
-          <p style={{ color: hovered ? "#F5F5DC" : "rgba(245,245,220,0.4)", fontSize: "0.75rem", fontWeight: 600, transition: "color 0.3s", lineHeight: 1.3 }}>{partner.name}</p>
-          <p style={{ color: hovered ? partner.color : "rgba(245,245,220,0.2)", fontSize: "0.55rem", letterSpacing: "0.1em", transition: "color 0.3s" }}>{partner.nameEn}</p>
+          <p style={{ color: hovered ? "#F5F5DC" : "rgba(245,245,220,0.4)", fontSize: "0.7rem", fontWeight: 600, transition: "color 0.3s", lineHeight: 1.3 }}>{partner.name}</p>
         </div>
       </motion.div>
     </div>

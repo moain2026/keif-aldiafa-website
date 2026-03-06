@@ -6,16 +6,18 @@ import { motion, useScroll, useTransform, AnimatePresence } from "motion/react";
 import { ImageWithFallback } from "@/components/ImageWithFallback";
 import { PartnersSlider } from "@/components/PartnersSlider";
 
-const HERO_IMG = "https://images.unsplash.com/photo-1749517841197-76792f2b0cd9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=90&w=1920";
-const COFFEE_IMG = "https://images.unsplash.com/photo-1670351230643-27f874d17025?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800";
-const CATERING_IMG = "https://images.unsplash.com/photo-1764380746366-f4d8cc52e1e3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800";
-const TEA_IMG = "https://images.unsplash.com/photo-1667305200758-fae1f7586b71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800";
-const EVENT_IMG = "https://images.unsplash.com/photo-1740131006875-52c21f216e7a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800";
-const WAITER_IMG = "https://images.unsplash.com/photo-1770739576489-cd201676b898?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800";
-const EQUIP_IMG = "https://images.unsplash.com/photo-1771830933605-ffbae3e3d1b5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800";
-const GALA_IMG = "https://images.unsplash.com/photo-1764358868789-400fb3d39fb7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800";
-const HOTEL_IMG = "https://images.unsplash.com/photo-1760385737098-0b555a75b2ba?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800";
-const DATES_IMG = "https://images.unsplash.com/photo-1733594113118-add313effd2e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800";
+import {
+  HERO_IMG,
+  COFFEE_IMG,
+  CATERING_IMG,
+  TEA_IMG,
+  EVENT_IMG,
+  WAITER_IMG,
+  EQUIP_IMG,
+  GALA_IMG,
+  HOTEL_IMG,
+  DATES_IMG,
+} from "@/lib/images";
 const WA = "966535636933";
 
 const whyCards = [

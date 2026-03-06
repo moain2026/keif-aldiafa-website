@@ -4,26 +4,15 @@ import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { ImageWithFallback } from "@/components/ImageWithFallback";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import {
+  SERVICE_IMAGES,
+  OUTFIT_IMAGES,
+  SERVICES_MALE,
+  SERVICES_FEMALE,
+  SERVICES_ARTISTIC,
+} from "@/lib/images";
 
 const WA = "966535636933";
-
-const MALE_WAITER = "https://images.unsplash.com/photo-1770739576489-cd201676b898?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800";
-const ZAMZAM_IMG = "https://images.unsplash.com/photo-1670351230643-27f874d17025?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800";
-const BUTLER_IMG = "https://images.unsplash.com/photo-1764380746366-f4d8cc52e1e3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800";
-const TEA_IMG = "https://images.unsplash.com/photo-1667305200758-fae1f7586b71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800";
-const HOSTESS_IMG = "https://images.unsplash.com/photo-1740131006875-52c21f216e7a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800";
-const CALLIGRAPHY_IMG = "https://images.unsplash.com/photo-1749517841197-76792f2b0cd9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=90&w=800";
-const ARTIST_IMG = "https://images.unsplash.com/photo-1764358868789-400fb3d39fb7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800";
-const BAND_IMG = "https://images.unsplash.com/photo-1760385737098-0b555a75b2ba?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800";
-const TENT_IMG = "https://images.unsplash.com/photo-1733594113118-add313effd2e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800";
-const COUNTER_IMG = "https://images.unsplash.com/photo-1771830933605-ffbae3e3d1b5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800";
-const PHOTO_IMG = "https://images.unsplash.com/photo-1764380746366-f4d8cc52e1e3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800";
-const BUFFET_IMG = "https://images.unsplash.com/photo-1670351230643-27f874d17025?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800";
-const TABLE_IMG = "https://images.unsplash.com/photo-1740131006875-52c21f216e7a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800";
-
-const O_BLACK_SUIT = "https://images.unsplash.com/photo-1770739576489-cd201676b898?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400";
-const O_TRAD_SAUDI = "https://images.unsplash.com/photo-1764380746366-f4d8cc52e1e3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400";
-const O_NAVY_SUIT = "https://images.unsplash.com/photo-1667305200758-fae1f7586b71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400";
 
 interface OutfitItem { name: string; img: string; desc: string; }
 interface ServiceItem { id: string; title: string; subtitle: string; img: string; description: string; features: string[]; outfits: OutfitItem[]; }
@@ -33,29 +22,29 @@ const categories: ServiceCategory[] = [
   {
     key: "male", label: "الخدمات الرجالية", sublabel: "Male Hospitality", icon: "👨‍💼", color: "#B8860B",
     services: [
-      { id: "hosts", title: "مضيفون", subtitle: "Male Hosts", img: MALE_WAITER, description: "مضيفون محترفون مدربون على أعلى معايير الضيافة الدولية والأصالة العربية.", features: ["زي رسمي أنيق", "خبرة +5 سنوات", "لغات متعددة", "بروتوكول VIP"], outfits: [{ name: "بدلة سوداء كلاسيكية", img: O_BLACK_SUIT, desc: "بدلة رسمية للمناسبات الكبرى" }, { name: "ثوب سعودي", img: O_TRAD_SAUDI, desc: "ثوب سعودي أصيل" }, { name: "بدلة كحلي", img: O_NAVY_SUIT, desc: "بدلة كحلي أنيقة" }] },
-      { id: "zamzam", title: "سقّاء زمزم", subtitle: "Zamzam Server", img: ZAMZAM_IMG, description: "سقاء زمزم بأسلوب تراثي فاخر يعكس أصالة الضيافة السعودية.", features: ["زي تراثي أصيل", "إبريق نحاسي فاخر", "خدمة شخصية", "تقديم فوري"], outfits: [{ name: "زي السقّاء التراثي", img: O_TRAD_SAUDI, desc: "زي تراثي أصيل" }] },
-      { id: "safarjia", title: "صبّاح قهوة / سفرجي", subtitle: "Coffee Butler", img: BUTLER_IMG, description: "صبّاح قهوة محترف يقدم القهوة السعودية الأصيلة بأسلوب يليق بضيوفكم.", features: ["قهوة سعودية طازجة", "دلال نحاسية أصيلة", "تمر وحلويات", "خدمة مستمرة"], outfits: [{ name: "ثوب سعودي مع بشت", img: O_TRAD_SAUDI, desc: "زي تقليدي فاخر" }] },
-      { id: "sawas", title: "سوّاس", subtitle: "Valet Service", img: TEA_IMG, description: "خدمة صف السيارات بأعلى معايير الاحترافية والأمان.", features: ["خدمة سريعة", "تأمين شامل", "فريق مدرب", "تنظيم المواقف"], outfits: [{ name: "بدلة رسمية", img: O_BLACK_SUIT, desc: "بدلة رسمية أنيقة" }] },
+      { id: "hosts", title: "مضيفون", subtitle: "Male Hosts", img: SERVICE_IMAGES.maleWaiter, description: "مضيفون محترفون مدربون على أعلى معايير الضيافة الدولية والأصالة العربية.", features: ["زي رسمي أنيق", "خبرة +5 سنوات", "لغات متعددة", "بروتوكول VIP"], outfits: [{ name: "حزام", img: OUTFIT_IMAGES.hizam, desc: "زي رسمي بحزام أنيق" }, { name: "دقلة", img: OUTFIT_IMAGES.dagla, desc: "دقلة سعودية أصيلة" }, { name: "دقلة وجنبية", img: OUTFIT_IMAGES.daglaJanbiya, desc: "دقلة مع جنبية تراثية" }, { name: "سديرية", img: OUTFIT_IMAGES.sideriya, desc: "سديرية أنيقة" }, { name: "مكاوي", img: OUTFIT_IMAGES.makkawi, desc: "زي مكاوي تراثي" }] },
+      { id: "zamzam", title: "سقّاء زمزم", subtitle: "Zamzam Server", img: SERVICE_IMAGES.zamzam, description: "سقاء زمزم بأسلوب تراثي فاخر يعكس أصالة الضيافة السعودية.", features: ["زي تراثي أصيل", "إبريق نحاسي فاخر", "خدمة شخصية", "تقديم فوري"], outfits: [{ name: "زي السقّاء التراثي", img: OUTFIT_IMAGES.safarjia, desc: "زي تراثي أصيل" }] },
+      { id: "safarjia", title: "صبّاح قهوة / سفرجي", subtitle: "Coffee Butler", img: SERVICE_IMAGES.butler, description: "صبّاح قهوة محترف يقدم القهوة السعودية الأصيلة بأسلوب يليق بضيوفكم.", features: ["قهوة سعودية طازجة", "دلال نحاسية أصيلة", "تمر وحلويات", "خدمة مستمرة"], outfits: [{ name: "ثوب سعودي مع بشت", img: OUTFIT_IMAGES.safarjia, desc: "زي تقليدي فاخر" }] },
+      { id: "sawas", title: "سوّاس", subtitle: "Valet Service", img: SERVICE_IMAGES.sawas, description: "خدمة صف السيارات بأعلى معايير الاحترافية والأمان.", features: ["خدمة سريعة", "تأمين شامل", "فريق مدرب", "تنظيم المواقف"], outfits: [{ name: "بدلة رسمية", img: OUTFIT_IMAGES.sawas, desc: "بدلة رسمية أنيقة" }] },
     ],
   },
   {
     key: "female", label: "الخدمات النسائية", sublabel: "Female Hospitality", icon: "👩‍💼", color: "#D4A017",
     services: [
-      { id: "hostesses", title: "مضيفات", subtitle: "Female Hosts", img: HOSTESS_IMG, description: "مضيفات محترفات بمظهر راقٍ وخدمة استثنائية لمناسباتكم النسائية.", features: ["مظهر أنيق وراقٍ", "خدمة احترافية", "تنسيق المناسبات", "استقبال VIP"], outfits: [{ name: "عباءة فاخرة", img: O_TRAD_SAUDI, desc: "عباءة مصممة خصيصاً" }] },
+      { id: "hostesses", title: "مضيفات", subtitle: "Female Hosts", img: SERVICE_IMAGES.hostess, description: "مضيفات محترفات بمظهر راقٍ وخدمة استثنائية لمناسباتكم النسائية.", features: ["مظهر أنيق وراقٍ", "خدمة احترافية", "تنسيق المناسبات", "استقبال VIP"], outfits: [{ name: "عباءة فاخرة", img: OUTFIT_IMAGES.female, desc: "عباءة مصممة خصيصاً" }] },
     ],
   },
   {
     key: "artistic", label: "الخدمات الفنية", sublabel: "Artistic Services", icon: "🎨", color: "#F0C040",
     services: [
-      { id: "calligrapher", title: "خطاط", subtitle: "Arabic Calligrapher", img: CALLIGRAPHY_IMG, description: "خطاط محترف يضيف لمسة فنية راقية لمناسباتكم.", features: ["خط عربي أصيل", "كتابة أسماء الضيوف", "لوحات فنية حية", "هدايا مخصصة"], outfits: [] },
-      { id: "artist", title: "رسّام بورتريه", subtitle: "Portrait Artist", img: ARTIST_IMG, description: "رسام بورتريه محترف يرسم لوحات حية لضيوفكم.", features: ["رسم حي سريع", "أنماط متنوعة", "هدايا تذكارية", "تجربة تفاعلية"], outfits: [] },
-      { id: "folkband", title: "فرقة شعبية", subtitle: "Folk Band", img: BAND_IMG, description: "فرقة شعبية تضيف أجواء حماسية أصيلة لمناسباتكم.", features: ["عرض حي", "أغاني تراثية", "أجواء حماسية", "فقرات متنوعة"], outfits: [] },
-      { id: "heritage-tent", title: "خيمة تراثية", subtitle: "Heritage Tent", img: TENT_IMG, description: "خيمة تراثية سعودية مجهزة بالكامل لإضافة لمسة أصالة.", features: ["تجهيز كامل", "ديكور تراثي", "إضاءة مميزة", "أحجام متعددة"], outfits: [] },
-      { id: "counter", title: "كاونتر ضيافة", subtitle: "Hospitality Counter", img: COUNTER_IMG, description: "كاونتر ضيافة فاخر مجهز بالكامل.", features: ["تصميم أنيق", "تجهيزات كاملة", "أحجام متعددة", "توصيل وتركيب"], outfits: [] },
-      { id: "photo-booth", title: "ركن التصوير", subtitle: "Photo Booth", img: PHOTO_IMG, description: "ركن تصوير احترافي لتوثيق لحظات مناسباتكم.", features: ["خلفيات متنوعة", "طباعة فورية", "إكسسوارات ممتعة", "صور رقمية"], outfits: [] },
-      { id: "buffet", title: "بوفيه متكامل", subtitle: "Full Buffet", img: BUFFET_IMG, description: "تجهيز بوفيه متكامل بأطباق فاخرة ومتنوعة.", features: ["أطباق عالمية", "تقديم فاخر", "معدات حديثة", "فريق متخصص"], outfits: [] },
-      { id: "mobile-table", title: "طاولة متنقلة", subtitle: "Mobile Table", img: TABLE_IMG, description: "طاولة متنقلة فاخرة لتقديم المشروبات والحلويات.", features: ["تصميم أنيق", "حركة سهلة", "أحجام متعددة", "تخصيص كامل"], outfits: [] },
+      { id: "calligrapher", title: "خطاط", subtitle: "Arabic Calligrapher", img: SERVICE_IMAGES.calligrapher, description: "خطاط محترف يضيف لمسة فنية راقية لمناسباتكم.", features: ["خط عربي أصيل", "كتابة أسماء الضيوف", "لوحات فنية حية", "هدايا مخصصة"], outfits: [] },
+      { id: "artist", title: "رسّام بورتريه", subtitle: "Portrait Artist", img: SERVICE_IMAGES.artist, description: "رسام بورتريه محترف يرسم لوحات حية لضيوفكم.", features: ["رسم حي سريع", "أنماط متنوعة", "هدايا تذكارية", "تجربة تفاعلية"], outfits: [] },
+      { id: "folkband", title: "فرقة شعبية", subtitle: "Folk Band", img: SERVICE_IMAGES.folkband, description: "فرقة شعبية تضيف أجواء حماسية أصيلة لمناسباتكم.", features: ["عرض حي", "أغاني تراثية", "أجواء حماسية", "فقرات متنوعة"], outfits: [] },
+      { id: "heritage-tent", title: "خيمة تراثية", subtitle: "Heritage Tent", img: SERVICE_IMAGES.heritageTent, description: "خيمة تراثية سعودية مجهزة بالكامل لإضافة لمسة أصالة.", features: ["تجهيز كامل", "ديكور تراثي", "إضاءة مميزة", "أحجام متعددة"], outfits: [] },
+      { id: "counter", title: "كاونتر ضيافة", subtitle: "Hospitality Counter", img: SERVICE_IMAGES.counter, description: "كاونتر ضيافة فاخر مجهز بالكامل.", features: ["تصميم أنيق", "تجهيزات كاملة", "أحجام متعددة", "توصيل وتركيب"], outfits: [] },
+      { id: "photo-booth", title: "ركن التصوير", subtitle: "Photo Booth", img: SERVICE_IMAGES.photoBooth, description: "ركن تصوير احترافي لتوثيق لحظات مناسباتكم.", features: ["خلفيات متنوعة", "طباعة فورية", "إكسسوارات ممتعة", "صور رقمية"], outfits: [] },
+      { id: "buffet", title: "بوفيه متكامل", subtitle: "Full Buffet", img: SERVICE_IMAGES.buffet, description: "تجهيز بوفيه متكامل بأطباق فاخرة ومتنوعة.", features: ["أطباق عالمية", "تقديم فاخر", "معدات حديثة", "فريق متخصص"], outfits: [] },
+      { id: "mobile-table", title: "طاولة متنقلة", subtitle: "Mobile Table", img: SERVICE_IMAGES.mobileTable, description: "طاولة متنقلة فاخرة لتقديم المشروبات والحلويات.", features: ["تصميم أنيق", "حركة سهلة", "أحجام متعددة", "تخصيص كامل"], outfits: [] },
     ],
   },
 ];

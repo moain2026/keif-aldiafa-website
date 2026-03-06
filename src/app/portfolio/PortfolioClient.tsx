@@ -4,20 +4,21 @@ import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { ImageWithFallback } from "@/components/ImageWithFallback";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import {
+  HERO_IMG as heroImg,
+  COFFEE_IMG as coffeeImg,
+  CATERING_IMG as cateringImg,
+  TEA_IMG as teaImg,
+  EVENT_IMG as eventImg,
+  WAITER_IMG as waiterImg,
+  EQUIP_IMG as equipImg,
+  PORTFOLIO_IMG as portfolioImg,
+  KITCHEN_IMG as kitchenImg,
+  DATES_IMG as datesImg,
+  FOOD_IMG as foodImg,
+} from "@/lib/images";
 
 const WA = "966535636933";
-
-const heroImg = "https://images.unsplash.com/photo-1749517841197-76792f2b0cd9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=90&w=1920";
-const coffeeImg = "https://images.unsplash.com/photo-1670351230643-27f874d17025?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800";
-const cateringImg = "https://images.unsplash.com/photo-1764380746366-f4d8cc52e1e3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800";
-const teaImg = "https://images.unsplash.com/photo-1667305200758-fae1f7586b71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800";
-const eventImg = "https://images.unsplash.com/photo-1740131006875-52c21f216e7a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800";
-const waiterImg = "https://images.unsplash.com/photo-1770739576489-cd201676b898?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800";
-const equipImg = "https://images.unsplash.com/photo-1771830933605-ffbae3e3d1b5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800";
-const portfolioImg = "https://images.unsplash.com/photo-1764358868789-400fb3d39fb7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800";
-const kitchenImg = "https://images.unsplash.com/photo-1760385737098-0b555a75b2ba?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800";
-const datesImg = "https://images.unsplash.com/photo-1733594113118-add313effd2e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800";
-const foodImg = "https://images.unsplash.com/photo-1764380746366-f4d8cc52e1e3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800";
 
 type FilterType = "all" | "events" | "hospitality" | "food" | "behind";
 

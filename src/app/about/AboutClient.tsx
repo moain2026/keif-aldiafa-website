@@ -3,11 +3,7 @@
 import { motion } from "motion/react";
 import { ImageWithFallback } from "@/components/ImageWithFallback";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-
-const heroImg = "https://images.unsplash.com/photo-1749517841197-76792f2b0cd9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=90&w=1920";
-const teamImg = "https://images.unsplash.com/photo-1770739576489-cd201676b898?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800";
-const galaImg = "https://images.unsplash.com/photo-1764358868789-400fb3d39fb7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800";
-const confImg = "https://images.unsplash.com/photo-1764380746366-f4d8cc52e1e3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800";
+import { HERO_IMG as heroImg, TEAM_IMG as teamImg, GALA_IMG as galaImg, CONF_IMG as confImg } from "@/lib/images";
 
 const values = [
   { icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-7 h-7"><path strokeLinecap="round" strokeLinejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" /></svg>, title: "الجودة أولاً", desc: "نلتزم بأعلى معايير الجودة في كل تفصيلة من خدماتنا" },
