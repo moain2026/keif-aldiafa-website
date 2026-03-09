@@ -36,10 +36,12 @@ const nextConfig = {
   poweredByHeader: false,
   compress: true,
   generateEtags: true,
+  swcMinify: true,
 
   // Experimental performance features
   experimental: {
     scrollRestoration: true,
+    optimizeCss: false,
   },
 
   images: {

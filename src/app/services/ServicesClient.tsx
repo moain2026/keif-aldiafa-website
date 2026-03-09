@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback, useEffect } from "react";
+import Link from "next/link";
 import { motion, AnimatePresence } from "motion/react";
 import { ImageWithFallback } from "@/components/ImageWithFallback";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
@@ -31,7 +32,8 @@ const categories: ServiceCategory[] = [
   {
     key: "female", label: "الخدمات النسائية", sublabel: "Female Hospitality", icon: "👩‍💼", color: "#D4A017",
     services: [
-      { id: "hostesses", title: "مضيفات", subtitle: "Female Hosts", img: SERVICE_IMAGES.hostess, description: "مضيفات محترفات بمظهر راقٍ وخدمة استثنائية لمناسباتكم النسائية.", features: ["مظهر أنيق وراقٍ", "خدمة احترافية", "تنسيق المناسبات", "استقبال VIP"], outfits: [{ name: "عباءة فاخرة", img: OUTFIT_IMAGES.female, desc: "عباءة مصممة خصيصاً" }] },
+      { id: "reception-hostesses", title: "مضيفات الاستقبال", subtitle: "Reception Hostesses", img: SERVICES_FEMALE[0], description: "مضيفات متخصصات في استقبال الضيوف وإدارة مداخل الفعاليات والمؤتمرات.", features: ["مظهر راقٍ ومنضبط", "بروتوكولات استقبال", "إدارة قوائم الضيوف", "توجيه وإرشاد"], outfits: [{ name: "عباءة فاخرة", img: OUTFIT_IMAGES.female, desc: "عباءة مصممة خصيصاً" }] },
+      { id: "event-hostesses", title: "مضيفات المناسبات", subtitle: "Event Hostesses", img: SERVICES_FEMALE[1] || SERVICES_FEMALE[0], description: "مضيفات محترفات في تقديم الضيافة داخل قاعات الأفراح والفعاليات الاجتماعية.", features: ["تقديم القهوة والمشروبات", "توزيع الهدايا", "ترحيب وتكريم", "تنسيق طاولات الضيافة"], outfits: [{ name: "عباءة فاخرة", img: OUTFIT_IMAGES.female, desc: "عباءة مصممة خصيصاً" }] },
     ],
   },
   {
@@ -165,6 +167,14 @@ export default function ServicesClient() {
                   <ServiceCard key={service.id} service={service} onClick={() => setSelectedService(service)} index={i} />
                 ))}
               </div>
+              {currentCategory.key === "female" && (
+                <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="mt-8 text-center">
+                  <Link href="/services/female" className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm transition-all duration-300 hover:-translate-y-0.5" style={{ background: "linear-gradient(135deg, rgba(212,160,23,0.15), rgba(184,134,11,0.1))", border: "1px solid rgba(184,134,11,0.35)", color: "#D4A017", fontWeight: 700 }}>
+                    <span>عرض صفحة الخدمات النسائية الكاملة</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
+                  </Link>
+                </motion.div>
+              )}
             </motion.div>
           </AnimatePresence>
 

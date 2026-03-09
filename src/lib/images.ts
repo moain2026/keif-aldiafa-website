@@ -2,47 +2,131 @@
  * Centralized image path constants for the Keif Al-Diafa website.
  * All images are served locally from public/images/.
  *
- * Source: https://github.com/manaje12/img_kef.git (236 original images)
+ * Sources:
+ *   - https://github.com/manaje12/img_kef.git (236 original images)
+ *   - https://github.com/moain2026/img_kef_updated.git (243 updated images)
+ *
  * Structure:
- *   hero/           → 3 images (from Event photos)
- *   events/         → 82 images (all Event photos)
- *   weddings/       → 18 images (all Wedding photos)
- *   distributions/  → 5 images
- *   equipment/      → 21 images
- *   partners/       → 36 logos
- *   services/male/hosts/{hizam,dagla,dagla-janbiya,sideriya,makkawi}
- *   services/male/{safarjia,sawas,souqiya}
- *   services/female/
- *   services/artistic/{artist,folkband,heritage-tent,counter,photo-booth,buffet,mobile-table}
+ *   logo/            -> 6 files (color, gold, dark in png+svg)
+ *   hero/            -> 5 images (hero-main, hero-bg-pattern, hero-1..3)
+ *   services/male/   -> cover, sabbab, uniforms, safraja + hosts/sawas/souqiya/safarjia
+ *   services/female/ -> cover, reception, hostess
+ *   services/artistic/
+ *   arts/            -> painters, folk-team, photobooth, heritage-tent
+ *   offerings/       -> coffee, tea, cups, distributions, sweets, buffet, table, counter
+ *   portfolio/       -> events(82), weddings(18), arts(21)
+ *   partners/        -> 36+ logos
+ *   events/          -> 82 images (legacy)
+ *   weddings/        -> 18 images (legacy)
+ *   distributions/   -> 5 images (legacy)
+ *   equipment/       -> 21 images (legacy)
  */
 
 // ═══════════════════════════════════════════════════════════════
-// HERO IMAGES
+// NEW UNIFIED IMAGES OBJECT (per agent prompt specification)
 // ═══════════════════════════════════════════════════════════════
+
+export const IMAGES = {
+  logo: {
+    color: '/images/logo/logo-color.png',
+    colorSvg: '/images/logo/logo-color.svg',
+    gold: '/images/logo/logo-gold.png',
+    goldSvg: '/images/logo/logo-gold.svg',
+    dark: '/images/logo/logo-dark.png',
+    darkSvg: '/images/logo/logo-dark.svg',
+  },
+
+  hero: {
+    main: '/images/hero/hero-main.webp',
+    bg: '/images/hero/hero-bg-pattern.webp',
+  },
+
+  services: {
+    male: {
+      cover: '/images/services/male/cover.webp',
+      sabbab: [
+        '/images/services/male/sabbab-1.webp',
+        '/images/services/male/sabbab-2.webp',
+      ],
+      uniforms: {
+        dagla: '/images/services/male/moDhif-dagla.webp',
+        sediri: '/images/services/male/moDhif-sediri.webp',
+        hizam: '/images/services/male/moDhif-hizam.webp',
+        makawi: '/images/services/male/moDhif-makawi.webp',
+      },
+      safraja: '/images/services/male/safraja.webp',
+    },
+    female: {
+      cover: '/images/services/female/cover.webp',
+      reception: [
+        '/images/services/female/reception-1.webp',
+        '/images/services/female/reception-2.webp',
+      ],
+      hostess: [
+        '/images/services/female/hostess-1.webp',
+        '/images/services/female/hostess-2.webp',
+      ],
+    },
+  },
+
+  arts: {
+    painters: [
+      '/images/arts/painters-1.webp',
+      '/images/arts/painters-2.webp',
+    ],
+    folkTeam: [
+      '/images/arts/folk-team-1.webp',
+      '/images/arts/folk-team-2.webp',
+    ],
+    photobooth: ['/images/arts/photobooth-1.webp'],
+    heritageTent: ['/images/arts/heritage-tent-1.webp'],
+  },
+
+  offerings: {
+    coffeeDallah: '/images/offerings/coffee-dallah.webp',
+    teaRed: '/images/offerings/tea-red.webp',
+    cupsDecorated: '/images/offerings/cups-decorated.webp',
+    distributions: [
+      '/images/offerings/distributions-1.webp',
+      '/images/offerings/distributions-2.webp',
+    ],
+    sweetsPlate: '/images/offerings/sweets-plate.webp',
+    buffet: '/images/offerings/buffet-1.webp',
+    serviceTable: '/images/offerings/service-table-1.webp',
+    receptionCounter: '/images/offerings/reception-counter.webp',
+  },
+
+  portfolio: {
+    events: Array.from({ length: 82 }, (_, i) =>
+      `/images/portfolio/events/event-${String(i + 1).padStart(2, '0')}.webp`
+    ),
+    weddings: Array.from({ length: 18 }, (_, i) =>
+      `/images/portfolio/weddings/wedding-${String(i + 1).padStart(2, '0')}.webp`
+    ),
+    arts: Array.from({ length: 21 }, (_, i) =>
+      `/images/portfolio/arts/arts-${String(i + 1).padStart(2, '0')}.webp`
+    ),
+  },
+
+  partners: Array.from({ length: 36 }, (_, i) =>
+    `/images/partners/partner-${String(i + 1).padStart(2, '0')}.webp`
+  ),
+} as const;
+
+// ═══════════════════════════════════════════════════════════════
+// LEGACY EXPORTS (backward compatibility with existing components)
+// ═══════════════════════════════════════════════════════════════
+
 export const HERO_IMAGES = {
   main: "/images/hero/hero-1.webp",
   secondary: "/images/hero/hero-2.webp",
   tertiary: "/images/hero/hero-3.webp",
 };
 
-// ═══════════════════════════════════════════════════════════════
-// EVENT IMAGES (82 photos)
-// ═══════════════════════════════════════════════════════════════
 export const EVENT_IMAGES = Array.from({ length: 82 }, (_, i) => `/images/events/event-${i + 1}.webp`);
-
-// ═══════════════════════════════════════════════════════════════
-// WEDDING IMAGES (18 photos)
-// ═══════════════════════════════════════════════════════════════
 export const WEDDING_IMAGES = Array.from({ length: 18 }, (_, i) => `/images/weddings/wedding-${i + 1}.webp`);
-
-// ═══════════════════════════════════════════════════════════════
-// DISTRIBUTION IMAGES (5 photos)
-// ═══════════════════════════════════════════════════════════════
 export const DISTRIBUTION_IMAGES = Array.from({ length: 5 }, (_, i) => `/images/distributions/dist-${i + 1}.webp`);
 
-// ═══════════════════════════════════════════════════════════════
-// SERVICES — MALE
-// ═══════════════════════════════════════════════════════════════
 export const SERVICES_MALE = {
   hosts: {
     hizam: Array.from({ length: 2 }, (_, i) => `/images/services/male/hosts/hizam/hizam-${i + 1}.webp`),
@@ -50,7 +134,6 @@ export const SERVICES_MALE = {
     daglaJanbiya: Array.from({ length: 2 }, (_, i) => `/images/services/male/hosts/dagla-janbiya/dagla-janbiya-${i + 1}.webp`),
     sideriya: Array.from({ length: 3 }, (_, i) => `/images/services/male/hosts/sideriya/sideriya-${i + 1}.webp`),
     makkawi: Array.from({ length: 2 }, (_, i) => `/images/services/male/hosts/makkawi/makkawi-${i + 1}.webp`),
-    // Convenience: first image of dagla for thumbnails
     main: "/images/services/male/hosts/dagla/dagla-1.webp",
   },
   safarjia: Array.from({ length: 6 }, (_, i) => `/images/services/male/safarjia/safarjia-${i + 1}.webp`),
@@ -58,14 +141,8 @@ export const SERVICES_MALE = {
   souqiya: Array.from({ length: 8 }, (_, i) => `/images/services/male/souqiya/souqiya-${i + 1}.webp`),
 };
 
-// ═══════════════════════════════════════════════════════════════
-// SERVICES — FEMALE (2 photos)
-// ═══════════════════════════════════════════════════════════════
 export const SERVICES_FEMALE = Array.from({ length: 2 }, (_, i) => `/images/services/female/female-${i + 1}.webp`);
 
-// ═══════════════════════════════════════════════════════════════
-// SERVICES — ARTISTIC
-// ═══════════════════════════════════════════════════════════════
 export const SERVICES_ARTISTIC = {
   artist: Array.from({ length: 11 }, (_, i) => `/images/services/artistic/artist/artist-${i + 1}.webp`),
   folkband: Array.from({ length: 2 }, (_, i) => `/images/services/artistic/folkband/folkband-${i + 1}.webp`),
@@ -76,68 +153,26 @@ export const SERVICES_ARTISTIC = {
   mobileTable: Array.from({ length: 6 }, (_, i) => `/images/services/artistic/mobile-table/table-${i + 1}.webp`),
 };
 
-// ═══════════════════════════════════════════════════════════════
-// EQUIPMENT IMAGES (21 photos)
-// ═══════════════════════════════════════════════════════════════
 export const EQUIPMENT_IMAGES = Array.from({ length: 21 }, (_, i) => `/images/equipment/equip-${i + 1}.webp`);
-
-// ═══════════════════════════════════════════════════════════════
-// PARTNER LOGOS (36 logos)
-// ═══════════════════════════════════════════════════════════════
 export const PARTNER_LOGOS = Array.from({ length: 36 }, (_, i) => `/images/partners/partner-${i + 1}.webp`);
 
-// ═══════════════════════════════════════════════════════════════
-// CONVENIENCE SHORTCUTS — for quick access in components
-// ═══════════════════════════════════════════════════════════════
-
-/** Primary hero image */
+// Convenience shortcuts
 export const HERO_IMG = HERO_IMAGES.main;
-
-/** Coffee / Safarjia */
 export const COFFEE_IMG = SERVICES_MALE.safarjia[0];
-
-/** Catering / Events */
 export const CATERING_IMG = EVENT_IMAGES[2];
-
-/** Tea / Offerings */
 export const TEA_IMG = DISTRIBUTION_IMAGES[0];
-
-/** Event photo */
 export const EVENT_IMG = EVENT_IMAGES[0];
-
-/** Waiter / Male hosts */
 export const WAITER_IMG = SERVICES_MALE.hosts.main;
-
-/** Equipment */
 export const EQUIP_IMG = EQUIPMENT_IMAGES[0];
-
-/** Gala / Large event */
 export const GALA_IMG = EVENT_IMAGES[5];
-
-/** Hotel / Hospitality */
 export const HOTEL_IMG = EVENT_IMAGES[10];
-
-/** Dates / Sweets */
 export const DATES_IMG = DISTRIBUTION_IMAGES[1];
-
-/** Food / General */
 export const FOOD_IMG = DISTRIBUTION_IMAGES[2];
-
-/** Portfolio showcase */
 export const PORTFOLIO_IMG = EVENT_IMAGES[7];
-
-/** Kitchen / Behind scenes */
 export const KITCHEN_IMG = EQUIPMENT_IMAGES[5];
-
-/** Team member placeholder */
 export const TEAM_IMG = SERVICES_MALE.hosts.dagla[1];
-
-/** Conference img */
 export const CONF_IMG = EVENT_IMAGES[12];
 
-// ═══════════════════════════════════════════════════════════════
-// SERVICE-SPECIFIC IMAGES
-// ═══════════════════════════════════════════════════════════════
 export const SERVICE_IMAGES = {
   maleWaiter: SERVICES_MALE.hosts.main,
   zamzam: SERVICES_MALE.safarjia[1],
@@ -154,9 +189,6 @@ export const SERVICE_IMAGES = {
   mobileTable: SERVICES_ARTISTIC.mobileTable[0],
 };
 
-// ═══════════════════════════════════════════════════════════════
-// OUTFIT IMAGES (for service detail modals)
-// ═══════════════════════════════════════════════════════════════
 export const OUTFIT_IMAGES = {
   hizam: SERVICES_MALE.hosts.hizam[0],
   dagla: SERVICES_MALE.hosts.dagla[0],
