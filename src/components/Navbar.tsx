@@ -90,7 +90,7 @@ export default function Navbar() {
               transition={{ type: "spring", stiffness: 300 }}
               className="relative"
             >
-              <DallahLogo size={40} />
+              <DallahLogo size={40} variant="official" />
               <motion.div
                 className="absolute -inset-1 rounded-full"
                 style={{ background: "radial-gradient(circle, rgba(184,134,11,0.15) 0%, transparent 70%)" }}
@@ -184,7 +184,7 @@ export default function Navbar() {
               <div className="max-w-lg mx-auto px-5 pt-6">
                 <div className="w-10 h-1 bg-[#B8860B]/40 rounded-full mx-auto mb-5" />
                 <div className="flex items-center justify-center gap-3 mb-6">
-                  <DallahLogo size={32} />
+                  <DallahLogo size={32} variant="gold" />
                   <span className="gold-gradient-text" style={{ fontSize: "1.1rem", fontWeight: 800 }}>كيف الضيافة</span>
                 </div>
                 <div className="space-y-1">
